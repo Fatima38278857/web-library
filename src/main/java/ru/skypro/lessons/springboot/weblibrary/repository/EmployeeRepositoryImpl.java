@@ -3,6 +3,8 @@ package ru.skypro.lessons.springboot.weblibrary.repository;
 import org.springframework.stereotype.Repository;
 import ru.skypro.lessons.springboot.weblibrary.pojo.Employee;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -11,13 +13,11 @@ import java.util.stream.Collectors;
 @Repository // мы вешаем аннотацию Repository, чтобы Spring впоследствии внедрил его в EmployeeServiceImp.
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
-    private final List<Employee> employeeList = List.of(
+    private List<Employee> employeeList = new ArrayList<>(Arrays.asList(
             new Employee(1, "Катя", 90_000),
             new Employee(2, "Дима", 102_000),
             new Employee(3, "Олег", 80_000),
-            new Employee(4, "Вика", 165_000));
-
-
+            new Employee(4, "Вика", 165_000)));
 
     @Override
     public void addEmployee(Employee employee) {
@@ -45,7 +45,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
     @Override
     public boolean delete(int id) { // удоление
-        return employeeList.remove(id) != null;
+        return employeeList.removeIf(e -> e.getId() == id);
     }
 
     @Override

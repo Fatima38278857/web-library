@@ -29,7 +29,7 @@ public class EmployeeController {
     }
 
 
-    @PostMapping(value = "/employee")
+    @PutMapping (value = "/employee")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         employeeService.addEmployee(employee);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -46,8 +46,8 @@ public class EmployeeController {
     }
 
 
-    @PutMapping("/employee")
-    public void editEmployee ( @RequestBody Employee employee) {
+    @PostMapping ("/employee")
+    public void editEmployee(@RequestBody Employee employee) {
         employeeService.editEmployee(employee);
     }
 
